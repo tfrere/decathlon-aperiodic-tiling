@@ -128,6 +128,33 @@
       </div>
     </div>
 
+
+    <div class="half"  :style="{display: show.toLowerCase().includes('tiling') ? 'flex': 'none'}">
+      <div>
+        Layers
+        <button title="Download Tiling Image" class="save" @click="tilingDownloadCount++">💾</button>
+      </div>
+      <tiling-pattern   
+          :data="{
+        tiles: intersectionPoints,
+        pan: pan,
+        steps: steps,
+        multiplier: multiplier,
+        zoom: zoom,
+        colorTiles: colorTiles,
+        colors: colorPalette,
+        selectedLines: selectedLines,
+        selectedTiles: selectedTiles,
+        display: canvasDisplaySetting,
+        symmetry: symmetry,
+        stroke: stroke,
+        showStroke: showStroke,
+        rotate: rotate,
+        orientationColoring: orientationColoring,
+        download: tilingDownloadCount 
+      }"></tiling-pattern>
+    </div>
+
     <div class="bottomrightcorner">
         <button @click="clearSelection" v-if="selectedTiles.length > 0 || selectedLines.length > 0">Clear Selection</button>
         <button @click="reset" v-if="queryURL.length > 0">Reset</button>
@@ -183,7 +210,8 @@
     <div v-if="mode == 'size'" class="grid lightershade">
 
       <div>
-        <input class="slider" type="range" id="radius" v-model.number="radius" min="0" max="150" step="1"></input>
+        <input class="slider" type="range" id="radius" v-model.number="radius" min="0" max="2000" step="1"></input>
+        <p >{{radius}}</p>
         <label for="radius">Radius</label>        
       </div>
 
